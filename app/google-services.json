@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "686897142321",
+    "project_id": "creditphone",
+    "storage_bucket": "creditphone.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:686897142321:android:9b8ca603e9bcc987db9310",
+        "android_client_info": {
+          "package_name": "com.creditphone.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCnPj6QQVbt8EHryjSPIPMBF8iC3eDX6hc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

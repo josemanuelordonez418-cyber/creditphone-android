@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="24dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="CreditPhone"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="4dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="App de control de equipo"
+            android:textColor="#6B6B6B"
+            android:layout_marginBottom="24dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="ID de este equipo (deviceUid)"
+            android:textStyle="bold"
+            android:layout_marginBottom="4dp" />
+
+        <TextView
+            android:id="@+id/txtDeviceUid"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textIsSelectable="true"
+            android:background="#F0EFEA"
+            android:padding="12dp"
+            android:layout_marginBottom="8dp" />
+
+        <Button
+            android:id="@+id/btnCopiarUid"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Copiar ID"
+            android:layout_marginBottom="24dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Dirección del backend"
+            android:textStyle="bold"
+            android:layout_marginBottom="4dp" />
+
+        <EditText
+            android:id="@+id/editBaseUrl"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="http://192.168.1.X:4000/api"
+            android:layout_marginBottom="8dp" />
+
+        <Button
+            android:id="@+id/btnGuardarUrl"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Guardar dirección"
+            android:layout_marginBottom="24dp" />
+
+        <TextView
+            android:id="@+id/txtEstadoAdmin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Administrador de dispositivo: desconocido"
+            android:layout_marginBottom="8dp" />
+
+        <Button
+            android:id="@+id/btnActivarAdmin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="1. Activar administrador de dispositivo"
+            android:layout_marginBottom="16dp" />
+
+        <Button
+            android:id="@+id/btnRegistrar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="2. Registrar este equipo"
+            android:layout_marginBottom="16dp" />
+
+        <TextView
+            android:id="@+id/txtResultado"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textColor="#2A9D8F" />
+
+    </LinearLayout>
+</ScrollView>
