@@ -32,10 +32,11 @@ class CreditPhoneMessagingService : FirebaseMessagingService() {
 
         when (tipo) {
             "bloquear" -> {
-                aplicarBloqueo()
+                aplicarBloqueo(motivo)
                 notificar("Equipo bloqueado", motivo.ifBlank { "El equipo fue bloqueado por mora en los pagos." })
             }
             "desbloquear" -> {
+                quitarBloqueo()
                 notificar("Equipo desbloqueado", motivo.ifBlank { "El pago fue confirmado, el equipo está desbloqueado." })
             }
         }
