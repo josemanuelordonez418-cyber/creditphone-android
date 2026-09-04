@@ -24,7 +24,7 @@ object ApiClient {
         body.put("fcmToken", fcmToken)
 
         val request = Request.Builder()
-            .url("$baseUrl/devices/activar")
+            .url("$baseUrl/api/devices/activar")
             .post(body.toString().toRequestBody(JSON))
             .build()
 
@@ -33,7 +33,7 @@ object ApiClient {
 
     fun consultarEstado(baseUrl: String, deviceToken: String, cb: Callback2) {
         val request = Request.Builder()
-            .url("$baseUrl/devices/estado")
+            .url("$baseUrl/api/devices/estado")
             .header("Authorization", "Bearer $deviceToken")
             .get()
             .build()
@@ -46,7 +46,7 @@ object ApiClient {
         body.put("fcmToken", fcmToken)
 
         val request = Request.Builder()
-            .url("$baseUrl/devices/token")
+            .url("$baseUrl/api/devices/token")
             .header("Authorization", "Bearer $deviceToken")
             .put(body.toString().toRequestBody(JSON))
             .build()
