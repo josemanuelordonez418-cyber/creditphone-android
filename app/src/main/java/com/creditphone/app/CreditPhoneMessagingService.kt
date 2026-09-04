@@ -4,6 +4,7 @@ import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.admin.DevicePolicyManager
 import android.content.ComponentName
+import android.content.Intent
 import android.content.Context
 import android.os.Build
 import androidx.core.app.NotificationCompat
@@ -40,12 +41,15 @@ class CreditPhoneMessagingService : FirebaseMessagingService() {
         }
     }
 
-    private fun aplicarBloqueo() {
-        val dpm = getSystemService(Context.DEVICE_POLICY_SERVICE) as DevicePolicyManager
-        val admin = ComponentName(this, CreditPhoneDeviceAdminReceiver::class.java)
-        if (dpm.isAdminActive(admin)) {
-            dpm.lockNow()
-        }
+    private fun aplicarBloqueo(motivo: String) {
+        Prefs.setBloqueado(this, true, motivo)
+        val intent = Intent(this, LockScreenActivity::class.java)
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+        startActivity(intent)
+    }
+
+    private fun quitarBloqueo() {
+        Prefs.setBloqueado(this, false)
     }
 
     private fun notificar(titulo: String, texto: String) {

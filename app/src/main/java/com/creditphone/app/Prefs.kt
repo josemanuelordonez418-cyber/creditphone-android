@@ -26,4 +26,24 @@ object Prefs {
         context.getSharedPreferences(NOMBRE, Context.MODE_PRIVATE).edit()
             .putString(CLAVE_DEVICE_TOKEN, token).apply()
     }
+
+    private const val CLAVE_BLOQUEADO = "bloqueado"
+    private const val CLAVE_MOTIVO_BLOQUEO = "motivo_bloqueo"
+
+    fun getBloqueado(context: Context): Boolean {
+        val prefs = context.getSharedPreferences(NOMBRE, Context.MODE_PRIVATE)
+        return prefs.getBoolean(CLAVE_BLOQUEADO, false)
+    }
+
+    fun setBloqueado(context: Context, bloqueado: Boolean, motivo: String = "") {
+        context.getSharedPreferences(NOMBRE, Context.MODE_PRIVATE).edit()
+            .putBoolean(CLAVE_BLOQUEADO, bloqueado)
+            .putString(CLAVE_MOTIVO_BLOQUEO, motivo)
+            .apply()
+    }
+
+    fun getMotivoBloqueo(context: Context): String {
+        val prefs = context.getSharedPreferences(NOMBRE, Context.MODE_PRIVATE)
+        return prefs.getString(CLAVE_MOTIVO_BLOQUEO, "") ?: ""
+    }
 }

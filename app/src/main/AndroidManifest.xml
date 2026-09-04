@@ -40,6 +40,12 @@
             </intent-filter>
         </service>
 
+        <activity
+            android:name=".LockScreenActivity"
+            android:exported="false"
+            android:launchMode="singleTask"
+            android:theme="@style/Theme.CreditPhone" />
+
     </application>
 
 </manifest>
