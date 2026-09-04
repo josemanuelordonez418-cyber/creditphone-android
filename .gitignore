@@ -9,3 +9,5 @@
 .cxx
 local.properties
 app/build/
+creditphone-release.keystore
+creditphone-release.keystore.base64
