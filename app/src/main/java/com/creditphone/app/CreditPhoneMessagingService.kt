@@ -4,6 +4,7 @@ import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.admin.DevicePolicyManager
 import android.content.ComponentName
+import android.app.PendingIntent
 import android.content.Intent
 import android.content.Context
 import android.os.Build
@@ -44,9 +45,36 @@ class CreditPhoneMessagingService : FirebaseMessagingService() {
 
     private fun aplicarBloqueo(motivo: String) {
         Prefs.setBloqueado(this, true, motivo)
+
         val intent = Intent(this, LockScreenActivity::class.java)
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-        startActivity(intent)
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP)
+        val pendingIntent = PendingIntent.getActivity(
+            this, 0, intent,
+            PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
+        )
+
+        val canalId = "creditphone_bloqueo_pantalla"
+        val manager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val canal = NotificationChannel(
+                canalId,
+                "Bloqueo de equipo (pantalla completa)",
+                NotificationManager.IMPORTANCE_HIGH
+            )
+            manager.createNotificationChannel(canal)
+        }
+
+        val notificacionBloqueo = NotificationCompat.Builder(this, canalId)
+            .setContentTitle("Equipo bloqueado")
+            .setContentText(motivo.ifBlank { "El equipo fue bloqueado por mora en los pagos." })
+            .setSmallIcon(android.R.drawable.ic_lock_idle_lock)
+            .setPriority(NotificationCompat.PRIORITY_HIGH)
+            .setCategory(NotificationCompat.CATEGORY_CALL)
+            .setFullScreenIntent(pendingIntent, true)
+            .setAutoCancel(true)
+            .build()
+
+        manager.notify(2, notificacionBloqueo)
     }
 
     private fun quitarBloqueo() {
