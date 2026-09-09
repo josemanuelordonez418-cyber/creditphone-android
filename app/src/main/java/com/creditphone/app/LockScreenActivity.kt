@@ -8,6 +8,8 @@ import android.view.WindowManager
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import android.app.admin.DevicePolicyManager
+import android.content.Context
 
 class LockScreenActivity : AppCompatActivity() {
 
@@ -47,6 +49,13 @@ class LockScreenActivity : AppCompatActivity() {
         layout.addView(titulo)
         layout.addView(mensaje)
         setContentView(layout)
+                val dpm = getSystemService(Context.DEVICE_POLICY_SERVICE) as DevicePolicyManager
+        if (dpm.isDeviceOwnerApp(packageName)) {
+            try {
+                startLockTask()
+            } catch (e: Exception) {
+            }
+        }
     }
 
     override fun onBackPressed() {
@@ -59,6 +68,16 @@ class LockScreenActivity : AppCompatActivity() {
             val intent = Intent(this, LockScreenActivity::class.java)
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP)
             startActivity(intent)
+        }
+    }
+    
+    override fun onDestroy() {
+        super.onDestroy()
+        if (!Prefs.getBloqueado(this)) {
+            try {
+                stopLockTask()
+            } catch (e: Exception) {
+            }
         }
     }
 }
